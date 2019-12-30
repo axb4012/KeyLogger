@@ -3,9 +3,11 @@
 class Saver {
 public:
 
-	Saver(const char* filename);
+	Saver(const char* filename, bool debug);
 	~Saver();
 	int Save(int& _key);
+
+	bool isdebug;
 
 
 private:

@@ -1,9 +1,9 @@
 #include<iostream>
 #include<Windows.h>
 #include "Saver.h"
-#include <typeinfo>
 
-Saver::Saver(const char* filename) {
+Saver::Saver(const char* filename, bool debug=false) {
+	isdebug = debug;
 	fopen_s(&file, filename, "a+");
 }
 
@@ -32,7 +32,6 @@ int Saver::Save(int& _key) {
 		break;
 	}
 
-	std::cout << *str << "\n";
 	if (!write_to_file(str)) {
 		std::cout << "Error opening file";
 		exit(EXIT_FAILURE);
@@ -43,7 +42,9 @@ int Saver::Save(int& _key) {
 
 
 bool Saver::write_to_file(char* str) {
-	std::cout << "String is "<< *str<< " of type "<< typeid(*str).name()<<"\n";
+	if (isdebug) {
+		std::cout << "Written " << *str << " to file.\n";
+	}
 	fprintf(file, "%c", *str); 
 	return true;
 }

