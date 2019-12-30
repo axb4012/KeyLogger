@@ -1,6 +1,7 @@
 #include<iostream>
 #include<Windows.h>
 #include "Saver.h"
+#include <typeinfo>
 
 Saver::Saver(const char* filename) {
 	fopen_s(&file, filename, "a+");
@@ -42,6 +43,7 @@ int Saver::Save(int& _key) {
 
 
 bool Saver::write_to_file(char* str) {
-	fprintf(file, "%s", str);
+	std::cout << "String is "<< *str<< " of type "<< typeid(*str).name()<<"\n";
+	fprintf(file, "%c", *str); 
 	return true;
 }
